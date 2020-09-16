@@ -19,7 +19,7 @@ const App = (props) => {
     };
 
     if (role === 'receiver') {
-      subscribeToGetSecret((err, match) => console.log('match: ', match, key === match));
+      subscribeToGetSecret((err, match) => setSecret(match));
       emitGetSecret()
     }
   }, [role, key])
