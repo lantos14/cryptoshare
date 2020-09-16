@@ -6,15 +6,16 @@ import {
   Route,
 } from "react-router-dom";
 import './index.css';
-import App from './App';
+import SenderApp from './SenderApp';
+import ReceiverApp from './ReceiverApp';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route path='/:key' render={(props) => <App {...props} role='receiver'/>} />
-        <Route path='/'  render={(props) => <App {...props} role='sender'/>} />
+        <Route path='/:key' component={ReceiverApp} />
+        <Route path='/'  component={SenderApp} />
       </Switch>
     </Router>
   </React.StrictMode>,

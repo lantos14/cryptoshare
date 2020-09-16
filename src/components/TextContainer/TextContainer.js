@@ -8,16 +8,13 @@ const TextContainer = ({ role, url, generateUrl, secret }) => {
 
   useEffect(() => {
     api.subscribeToText((err, encryptedText) => {
-      console.log('useEffect text, secret: ', encryptedText, secret);
       const decryptedText = decrypt(encryptedText, secret);
-      console.log('decryptedText: ', decryptedText);
       setText(decryptedText)
     } );
   }, [secret])
 
   const handleTextChange = (e) => {
     const text = e.target.value;
-    console.log('handleTextChange: ', text);
     const encryptedText = encrypt(text, secret);
     api.emitText(encryptedText);
   }

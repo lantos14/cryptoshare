@@ -15,7 +15,6 @@ export const subscribeToSecret = callback => {
 }
 
 export const emitSecret = secret => {
-  console.log('emitSecret: ', secret);
   socket.emit('createSecret', secret);
 }
 
@@ -24,6 +23,5 @@ export const subscribeToGetSecret = callback => {
 }
 
 export const emitGetSecret = () => {
-  console.log('emitSecret');
   socket.emit('getSecret');
 }
