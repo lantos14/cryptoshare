@@ -1,68 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Cryptoshare
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+1. get the repo: `git clone https://github.com/lantos14/cryptoshare.git`
+2. install dependencies: `npm i`
 
-### `npm start`
+## How to start the app
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. `node server`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+    This scripts starts a simple node server to handle interaction between multiple app instances
 
-### `npm test`
+2. `npm start`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    this script starts the application at [http://localhost:3000](http://localhost:3000)
 
-### `npm run build`
+## How to use the app
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ### If you want to send an encrypted message
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    1. Click on the 'Generate URL'
+    2. Copy the URL generated and send it to the receiver user
+    3. Start typing in the text area
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ### If you want to receive an encrypted message
 
-### `npm run eject`
+    1. Ask the sender user to give you an URL
+    2. Open the received URL and wait for the sender's input
+    3. You will see the text message in the text area
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Small Notes
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    - The receiver cannot edit the received text message
+    - The receiver will only see the messages, which were sent after He/She started a session (opened the provided URL)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## What was used to make this app
 
-## Learn More
+- [create-react-app](https://github.com/facebook/create-react-app)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    It is a fast and convenient tool when it comes to put together a simple app for showcasing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [socket.io](https://socket.io/)
 
-### Code Splitting
+    The application uses real time text sharing among multiple instances. With a simple nodejs server and socket.io,
+    data streams can be shared via multiple app instances with ease.
+  
+- [crypto-js](https://github.com/brix/crypto-js)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+    The application encrypts the data, before it sends out to the receiver client, and decrypts it at the receiver's end. The crypto-js library seemed very versatile with a lot of customization option, so I decided to use this library for encryption purposes.
 
-### Analyzing the Bundle Size
+## Considerations for future development
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+  - The app was tested only in local environment. It should be tested in deployment as well
+  - The routing of the app and the folder structure sould be revised
+  - Linter should be added to resolve general code formatting issues
+  - Security vulnerabilites should be researched further relating the node server, and secret passphrase usage
+  - Consider edge cases, possible error scenarios and update the code (when more than 2 users are connecting to the app, when wrong secret token is provided etc.)
