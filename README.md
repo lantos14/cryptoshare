@@ -52,8 +52,13 @@
 
 ## Considerations for future development
 
+This application only handles the 'happy case', when the app is used as described above. Some things needs to be considered, if the app is developed further:
+
   - The app was tested only in local environment. It should be tested in deployment as well
   - The routing of the app and the folder structure sould be revised
   - Linter should be added to resolve general code formatting issues
   - Security vulnerabilites should be researched further relating the node server, and secret passphrase usage
-  - Consider edge cases, possible error scenarios and update the code (when more than 2 users are connecting to the app, when wrong secret token is provided etc.)
+  - Consider edge cases, possible error scenarios and update the code. Examples: 
+      - more than 2 users are connecting to the app
+      - wrong secret token is provided
+      - sender creates a new session with new key but client stays in the old link with old key
