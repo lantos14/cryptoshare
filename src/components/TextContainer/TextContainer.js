@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import TextEditor from '../TextEditor/TextEditor';
-import { encrypt, decrypt } from "../../cryptoUtils";
+import { encrypt, decrypt, createMAC, verifyMAC } from "../../cryptoUtils";
 import * as api from '../../api';
 
 const TextContainer = ({ role, url, generateUrl, secret }) => {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    api.subscribeToText((err, encryptedText) => {
+    api.subscribeToText((err, emitObject) => {
+      const { encryptedText, hashFromSender } = emitObject;
       const decryptedText = decrypt(encryptedText, secret);
-      setText(decryptedText)
+      const hashIsValid = role === 'receiver' ? verifyMAC(hashFromSender, decryptedText, secret) : true;
+      
+      if (!hashIsValid) {
+        console.error("Text is not authenticed, or it's integrity is damaged!");
+      } else {
+        setText(decryptedText)
+      }
     } );
-  }, [secret])
+  }, [secret, role])
 
   const handleTextChange = (e) => {
     const text = e.target.value;
     const encryptedText = encrypt(text, secret);
-    api.emitText(encryptedText);
+    const hashFromSender = createMAC(text, secret);
+    api.emitText({ encryptedText, hashFromSender });
   }
   
   return (

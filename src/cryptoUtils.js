@@ -20,3 +20,13 @@ export const decrypt = (text, secret) => {
 export const generateSecret = () => {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
+
+export const createMAC = (text, secret) => {
+  const hash = CryptoJS.HmacSHA1(text, secret).toString();
+  return hash;
+}
+
+export const verifyMAC = (hashFromSender, text, secret) => {
+  const hash = CryptoJS.HmacSHA1(text, secret).toString();
+  return hashFromSender === hash;
+}

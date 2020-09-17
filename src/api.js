@@ -3,11 +3,11 @@ import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8000');
 
 export const subscribeToText = callback => {
-  socket.on('sendText', text => callback(null, text));
+  socket.on('sendText', emitObject => callback(null, emitObject));
 }
 
-export const emitText = text => {
-  socket.emit('sendText', text);
+export const emitText = (emitObject) => {
+  socket.emit('sendText', emitObject);
 }
 
 export const subscribeToSecret = callback => {
