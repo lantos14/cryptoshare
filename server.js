@@ -1,23 +1,23 @@
-const io = require('socket.io')();
+const io = require("socket.io")();
 
-let _secret = '';
+let _secret = "";
 
-io.on('connection', (client) => {
-  client.on('sendText', (text) => {
-      io.emit('sendText', text);
+io.on("connection", (client) => {
+  client.on("sendText", (text) => {
+    io.emit("sendText", text);
   });
 
-  client.on('createSecret', (secret) => {
-    _secret = secret
-    client.emit('createSecret', _secret);
+  client.on("createSecret", (secret) => {
+    _secret = secret;
+    client.emit("createSecret", _secret);
   });
 
-  client.on('getSecret', () => {
-    client.emit('getSecret', _secret);
+  client.on("getSecret", () => {
+    client.emit("getSecret", _secret);
   });
-})
+});
 
 const port = 8000;
 io.listen(port);
 
-console.log('server.js - listening on port: ', port);
+console.log("server.js - listening on port: ", port);

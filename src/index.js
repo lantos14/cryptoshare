@@ -1,25 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import './index.css';
-import SenderApp from './SenderApp';
-import ReceiverApp from './ReceiverApp';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./index.css";
+import SenderApp from "./SenderApp";
+import ReceiverApp from "./ReceiverApp";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route path='/:key' component={ReceiverApp} />
-        <Route path='/'  component={SenderApp} />
+        <Route path="/:key" component={ReceiverApp} />
+        <Route path="/" component={SenderApp} />
       </Switch>
     </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
